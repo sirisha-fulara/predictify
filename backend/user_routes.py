@@ -9,15 +9,21 @@ import shap
 from extensions import db
 from models import LoanApproval
 from datetime import datetime
+import os
 
 user_bp = Blueprint("user", __name__)
 
 # Load model & encoders once
 model = CatBoostClassifier()
-model.load_model("loan_model.cbm")
+# Dynamically find the path to this file, then build path to model
+model_path = os.path.join(os.path.dirname(__file__), "loan_model.cbm")
+model.load_model(model_path)
 
-education_encoder = joblib.load("encoders/education_encoder.pkl")
-self_employed_encoder = joblib.load("encoders/self_employed_encoder.pkl")
+encoder_path = os.path.join(os.path.dirname(__file__), "encoders", "education_encoder.pkl")
+education_encoder = joblib.load(encoder_path)
+
+self_path = os.path.join(os.path.dirname(__file__), "encoders", "self_employed_encoder.pkl")
+self_employed_encoder = joblib.load(self_path)
 
 REQUIRED_FIELDS = [
     'no_of_dependents', 'education', 'self_employed', 'income_annum',
