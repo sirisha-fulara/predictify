@@ -8,7 +8,11 @@ from user_routes import user_bp
 from auth_routes import auth_bp
 from admin_routes import admin_bp
 
-app=Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder=os.path.join(os.getcwd(), 'frontend', 'build'),
+    static_url_path='/'
+)
 app.config.from_object(Config)
 
 CORS(app, supports_credentials=True, static_folder='frontend/build', static_url_path='/')
