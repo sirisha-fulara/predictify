@@ -7,6 +7,7 @@ from extensions import db
 from user_routes import user_bp
 from auth_routes import auth_bp
 from admin_routes import admin_bp
+import os
 
 app = Flask(
     __name__,
