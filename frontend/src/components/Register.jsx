@@ -16,7 +16,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/auth/register', form);
+      await axios.post('https://predictify-1.onrender.com/auth/register', form);
       setMsg('✅ Registered successfully. Now login!');
     } catch (err) {
       setMsg(err.response?.data?.error || '❌ Registration failed');
