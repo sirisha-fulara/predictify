@@ -2,3 +2,9 @@ flask
 flask-cors
 flask-sqlalchemy
 flask-jwt-extended
+gunicorn
+pandas
+numpy
+catboost
+joblib
+shap
