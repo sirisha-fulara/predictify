@@ -16,7 +16,7 @@ app = Flask(
 )
 app.config.from_object(Config)
 
-CORS(app, supports_credentials=True, static_folder='frontend/build', static_url_path='/')
+CORS(app, supports_credentials=True, origins=["https://predictify-1.onrender.com"])
 jwt = JWTManager()
 db.init_app(app)
 jwt.init_app(app)
