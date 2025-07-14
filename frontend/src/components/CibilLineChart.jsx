@@ -1,4 +1,4 @@
-import React from "react";
+
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
 
 export default function CibilLineChart({ data }) {
