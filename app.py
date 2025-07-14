@@ -11,7 +11,7 @@ from admin_routes import admin_bp
 app=Flask(__name__)
 app.config.from_object(Config)
 
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, static_folder='frontend/build', static_url_path='/')
 jwt = JWTManager()
 db.init_app(app)
 jwt.init_app(app)
