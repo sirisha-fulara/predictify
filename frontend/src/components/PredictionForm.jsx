@@ -42,7 +42,7 @@ export default function PredictionForm() {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/user/predict', data, {
+      const res = await axios.post('https://predictify-1.onrender.com/user/predict', data, {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' },
       });
