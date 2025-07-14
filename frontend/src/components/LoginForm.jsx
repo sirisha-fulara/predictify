@@ -15,7 +15,7 @@ function LoginForm() {
 
         try {
             const res = await axios.post(
-                'http://localhost:5000/auth/login',
+                'https://predictify-1.onrender.com/auth/login',
                 { email, password },
                 { withCredentials: true }  // THIS IS THE KEY CHANGE
             );
