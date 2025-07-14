@@ -171,10 +171,9 @@ export default function PredictionForm() {
               <option value="" disabled>
                 Select Education
               </option>
-              <option value="High School">High School</option>
+              
               <option value="Graduate">Graduate</option>
-              <option value="Post Graduate">Post Graduate</option>
-              <option value="Other">Other</option>
+              <option value="Not Graduate">Not Graduate</option>
             </select>
             <span>Education</span>
           </label>
