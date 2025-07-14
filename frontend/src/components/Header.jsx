@@ -13,7 +13,7 @@ const Header = () => {
                     </div>
                     <div className="lg:flex lg:items-center lg:justify-end lg:space-x-6 sm:ml-auto">
 
-                        <Link to="/login" title="" className="hidden text-base text-white transition-all duration-200 lg:inline-flex hover:text-opacity-80"> Log in </Link>
+                        <Link to="/login" title="" className="text-base text-white transition-all duration-200 hover:text-opacity-80"> Log in </Link>
 
 
                         <Link to="/logout" title="" className="inline-flex items-center justify-center px-3 sm:px-5 py-2.5 text-sm sm:text-base font-semibold transition-all duration-200 text-white bg-white/20 hover:bg-white/40 focus:bg-white/40 rounded-lg" role="button"> Logout </Link>
