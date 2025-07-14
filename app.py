@@ -20,9 +20,14 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(user_bp, url_prefix="/user")
 app.register_blueprint(admin_bp, url_prefix="/admin")
 
-@app.route("/")
-def home():
-    return ("Flask app running")
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# catch-all route to handle frontend routing
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
     
 # Create DB tables
 with app.app_context():
