@@ -9,7 +9,7 @@ export default function Logout() {
   useEffect(() => {
     const doLogout = async () => {
       try {
-        await axios.post("http://localhost:5000/auth/logout", {}, {
+        await axios.post("https://predictify-1.onrender.com/auth/logout", {}, {
           withCredentials: true
         });
 
