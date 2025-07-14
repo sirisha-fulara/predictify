@@ -16,11 +16,11 @@ export default function AdminDashboard() {
   const fetchAdminData = async () => {
     try {
       const [m, a, c, i, r] = await Promise.all([
-        axios.get("http://localhost:5000/admin/metrics", { withCredentials: true }),
-        axios.get("http://localhost:5000/admin/approval-distribution", { withCredentials: true }),
-        axios.get("http://localhost:5000/admin/cibil-trend", { withCredentials: true }),
-        axios.get("http://localhost:5000/admin/income-vs-risk", { withCredentials: true }),
-        axios.get("http://localhost:5000/admin/risk-distribution", { withCredentials: true }),
+        axios.get("https://predictify-1.onrender.com/admin/metrics", { withCredentials: true }),
+        axios.get("https://predictify-1.onrender.com/admin/approval-distribution", { withCredentials: true }),
+        axios.get("https://predictify-1.onrender.com/admin/cibil-trend", { withCredentials: true }),
+        axios.get("https://predictify-1.onrender.com/admin/income-vs-risk", { withCredentials: true }),
+        axios.get("https://predictify-1.onrender.com/admin/risk-distribution", { withCredentials: true }),
       ]);
       setMetrics(m.data);
       setApprovalDist(a.data);
