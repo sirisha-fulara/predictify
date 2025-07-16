@@ -287,14 +287,15 @@ export default function PredictionForm() {
 
 const StyledWrapper = styled.div`
   .container {
-  display: flex;
-  gap: 10px; /* space between form and result */
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 1300px;
-  margin: 10px auto;
-  flex-wrap: wrap; /* for smaller screens, wrap vertically */
-}
+    display: flex;
+    gap: 10px; /* space between form and result */
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1300px;
+    margin: 10px auto;
+    flex-wrap: wrap; /* wrap vertically on small screens */
+  }
+
   .form {
     width: 600px;
     margin: 20px auto;
@@ -305,7 +306,9 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
+    box-sizing: border-box;
   }
+
   .title {
     font-size: 28px;
     font-weight: 700;
@@ -313,11 +316,13 @@ const StyledWrapper = styled.div`
     margin-bottom: 20px;
     text-align: center;
   }
+
   label {
     display: flex;
     flex-direction: column;
     font-size: 0.9rem;
   }
+
   .input {
     padding: 12px;
     margin-top: 5px;
@@ -327,10 +332,13 @@ const StyledWrapper = styled.div`
     color: #fff;
     font-size: 1rem;
   }
+
   .flex {
     display: flex;
     gap: 15px;
+    flex-wrap: wrap; /* so inputs wrap nicely on small screens */
   }
+
   .submit {
     margin-top: 15px;
     background: #00bfff;
@@ -343,30 +351,39 @@ const StyledWrapper = styled.div`
     cursor: pointer;
     transition: background-color 0.25s ease;
   }
+
   .submit:hover {
     background: #009acc;
   }
+
   .result-card {
     margin-top: 20px;
     padding: 20px;
     background: #0f172a;
     border-radius: 12px;
     width: 600px;
+    box-sizing: border-box;
   }
+
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
+
   .result-title {
     font-size: 18px;
     font-weight: 700;
     color: #60a5fa;
   }
+
   .error {
     color: #f87171;
     font-weight: 600;
   }
+
   .status {
     color: #10b981;
     font-weight: 600;
@@ -374,18 +391,22 @@ const StyledWrapper = styled.div`
     align-items: center;
     gap: 8px;
   }
+
   .dot {
     width: 8px;
     height: 8px;
     background: #10b981;
     border-radius: 50%;
   }
+
   .scores {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 20px;
+    flex-wrap: wrap;
   }
+
   .score-box {
     width: 160px;
     height: 160px;
@@ -396,40 +417,99 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    box-sizing: border-box;
   }
+
   .score-box p {
     margin: 0;
     font-weight: 600;
   }
+
   .shap-section {
     margin-top: 30px;
     background: #1e293b;
     padding: 20px;
     border-radius: 12px;
     color: #e2e8f0;
+    box-sizing: border-box;
   }
+
   .shap-title {
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 12px;
   }
+
   .shap-group {
     margin-bottom: 18px;
   }
+
   .shap-label {
     font-weight: 600;
     color: #fbbf24;
     margin-bottom: 8px;
   }
+
   .shap-group ul {
     padding-left: 20px;
     list-style: disc;
   }
+
   .shap-feature {
     color: #38bdf8;
     font-weight: 600;
   }
+
   .shap-value {
     color: #a5f3fc;
   }
+
+  /* Responsive tweaks */
+
+  @media (max-width: 768px) {
+    .form,
+    .result-card {
+      width: 100%;
+      max-width: 450px;
+      margin: 15px auto;
+      padding: 20px;
+    }
+
+    .flex {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .score-box {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .form,
+    .result-card {
+      max-width: 100%;
+      padding: 15px;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+
+    .submit {
+      font-size: 1rem;
+      padding: 12px;
+    }
+
+    .score-box {
+      width: 120px;
+      height: 120px;
+    }
+
+    .shap-title {
+      font-size: 18px;
+    }
+  }
 `;
+
