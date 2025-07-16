@@ -33,7 +33,22 @@ def serve():
 @app.errorhandler(404)
 def not_found(e):
     return send_from_directory(app.static_folder, 'index.html')
-    
+
+def create_default_admin():
+    admin_email = "admin@example.com"
+    existing_admin = User.query.filter_by(email=admin_email).first()
+    if not existing_admin:
+        admin = User(
+            email=admin_email,
+            password=generate_password_hash("admin123"),
+            role="admin"
+        )
+        db.session.add(admin)
+        db.session.commit()
+        print("✅ Admin created: admin@example.com / admin123")
+    else:
+        print("⚠️ Admin already exists.")
+
 # Create DB tables
 with app.app_context():
     db.create_all()
