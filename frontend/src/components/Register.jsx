@@ -48,7 +48,7 @@ export default function Register() {
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
           Register
         </button>
-        {msg && <p className="mt-2 text-sm">{msg}</p>}
+        {msg && <p className="mt-2 text-sm text-white">{msg}</p>}
       </form>
     </div>
   );
