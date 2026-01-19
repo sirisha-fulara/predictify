@@ -1,0 +1,26 @@
+{
+    "CatBoost": {
+        "Model": "CatBoost",
+        "Accuracy": 0.993,
+        "Precision": 0.9875,
+        "Recall": 0.9937,
+        "F1 Score": 0.9906,
+        "ROC AUC": 0.9994
+    },
+    "XGBoost": {
+        "Model": "XGBoost",
+        "Accuracy": 0.9965,
+        "Precision": 0.9968,
+        "Recall": 0.9937,
+        "F1 Score": 0.9953,
+        "ROC AUC": 0.9991
+    },
+    "RandomForest": {
+        "Model": "RandomForest",
+        "Accuracy": 0.9988,
+        "Precision": 1.0,
+        "Recall": 0.9969,
+        "F1 Score": 0.9984,
+        "ROC AUC": 0.9991
+    }
+}

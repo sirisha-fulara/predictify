@@ -1,0 +1,15 @@
+# Ignore Python files and folders
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+*.env
+.DS_Store
+
+# Node modules (frontend)
+frontend/node_modules/
+frontend/.env
+frontend/.DS_Store
+
