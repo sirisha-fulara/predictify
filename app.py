@@ -12,20 +12,20 @@ import os
 
 app=Flask(__name__)
 
-# Ensure instance folder exists for SQLite
-try:
-    os.makedirs(app.instance_path)
-except OSError:
-    pass
+# Ensure instance folder exists for SQLite (Explicitly match Config path)
+basedir = os.path.abspath(os.path.dirname(__file__))
+instance_dir = os.path.join(basedir, 'instance')
+if not os.path.exists(instance_dir):
+    os.makedirs(instance_dir)
 
 app.config.from_object(Config)
 
-# Update CORS to allow specific origins for credentials support
+# Update CORS: Use Regex to be safer and allow Vercel subdomains
 CORS(app, supports_credentials=True, resources={
     r"/*": {
         "origins": [
-            "https://predictify-49qt.vercel.app", 
-            "http://localhost:3000"
+            r"https://.*\.vercel\.app", 
+            r"http://localhost:\d+"
         ]
     }
 })
