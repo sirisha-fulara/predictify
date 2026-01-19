@@ -22,15 +22,18 @@ if not os.path.exists(instance_dir):
 
 app.config.from_object(Config)
 
-# Update CORS: Use compiled Regex to ensure correct matching
-CORS(app, supports_credentials=True, resources={
-    r"/*": {
-        "origins": [
-            re.compile(r"^https://.*\.vercel\.app$"), 
-            re.compile(r"^http://localhost:\d+$")
-        ]
-    }
-})
+# Check Origin Function
+def check_origin(origin):
+    if origin is None:
+        return True
+    if "localhost" in origin:
+        return True
+    if ".vercel.app" in origin:
+        return True
+    return False
+
+# Update CORS to use the check_origin function
+CORS(app, supports_credentials=True, origins=check_origin)
 jwt = JWTManager()
 db.init_app(app)
 jwt.init_app(app)
