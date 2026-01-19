@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from sqlalchemy import func
-from flask_cors import cross_origin
 from flask_jwt_extended import jwt_required, get_jwt_identity
 import numpy as np
 import joblib
@@ -246,7 +245,6 @@ def predict():
 
 
 @user_bp.route("/history", methods=["GET"])
-@cross_origin(origin='http://localhost:3000', supports_credentials=True)
 @jwt_required()
 def get_history():
     user_id = get_jwt_identity()
