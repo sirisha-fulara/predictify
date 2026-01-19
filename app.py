@@ -24,16 +24,23 @@ app.config.from_object(Config)
 
 # Check Origin Function
 def check_origin(origin):
+    print(f"DEBUG: Checking Origin: {origin}", flush=True)
     if origin is None:
         return True
     if "localhost" in origin:
         return True
     if ".vercel.app" in origin:
         return True
+    print(f"DEBUG: Origin REJECTED: {origin}", flush=True)
     return False
 
 # Update CORS to use the check_origin function
 CORS(app, supports_credentials=True, origins=check_origin)
+
+@app.before_request
+def log_request_info():
+    from flask import request
+    print(f"DEBUG: Headers: {request.headers}", flush=True)
 jwt = JWTManager()
 db.init_app(app)
 jwt.init_app(app)
