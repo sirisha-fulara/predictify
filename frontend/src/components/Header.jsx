@@ -7,10 +7,10 @@ const Header = () => {
             <div className="px-4 mx-auto sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16 lg:h-20">
                     <div className="flex-shrink-0">
-                        <a href="#" title="" className="flex items-center">
+                        <Link to="/" title="" className="flex items-center">
                             {/* Optional: Add a logo icon here if available, else just text */}
                             <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-cyan-400 font-sans">Predictify</p>
-                        </a>
+                        </Link>
                     </div>
                     <div className="lg:flex lg:items-center lg:justify-end lg:space-x-8 sm:ml-auto">
                         <Link to="/stats" title="" className="text-base font-medium text-slate-300 transition-all duration-200 hover:text-emerald-400"> Stats </Link>
