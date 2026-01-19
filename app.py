@@ -20,7 +20,15 @@ except OSError:
 
 app.config.from_object(Config)
 
-CORS(app, supports_credentials=True)
+# Update CORS to allow specific origins for credentials support
+CORS(app, supports_credentials=True, resources={
+    r"/*": {
+        "origins": [
+            "https://predictify-49qt.vercel.app", 
+            "http://localhost:3000"
+        ]
+    }
+})
 jwt = JWTManager()
 db.init_app(app)
 jwt.init_app(app)
