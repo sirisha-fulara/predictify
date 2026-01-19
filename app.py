@@ -10,6 +10,8 @@ from admin_routes import admin_bp
 
 import os
 
+import re
+
 app=Flask(__name__)
 
 # Ensure instance folder exists for SQLite (Explicitly match Config path)
@@ -20,12 +22,12 @@ if not os.path.exists(instance_dir):
 
 app.config.from_object(Config)
 
-# Update CORS: Use Regex to be safer and allow Vercel subdomains
+# Update CORS: Use compiled Regex to ensure correct matching
 CORS(app, supports_credentials=True, resources={
     r"/*": {
         "origins": [
-            r"https://.*\.vercel\.app", 
-            r"http://localhost:\d+"
+            re.compile(r"^https://.*\.vercel\.app$"), 
+            re.compile(r"^http://localhost:\d+$")
         ]
     }
 })
