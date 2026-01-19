@@ -4,7 +4,7 @@ from models import db, LoanApproval
 import pandas as pd
 from sqlalchemy import func
 
-admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
+admin_bp = Blueprint("admin", __name__)
 
 # Admin-protected route
 @admin_bp.route("/metrics", methods=["GET"])

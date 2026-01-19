@@ -6,7 +6,7 @@ from flask_jwt_extended import (
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
-auth_bp= Blueprint("auth", __name__, url_prefix="/auth")
+auth_bp= Blueprint("auth", __name__)
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
