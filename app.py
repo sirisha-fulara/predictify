@@ -26,7 +26,18 @@ app.config.from_object(Config)
 # Allow any Vercel subdomain or Localhost
 ALLOWED_ORIGINS_REGEX = re.compile(r"^(https://.*\.vercel\.app|http://localhost:\d+)$")
 
-CORS(app) # Basic init
+# CORS(app) # Remove Flask-CORS library init to avoid conflicts
+
+# Handle Preflight OPTIONS requests universally
+@app.route('/<path:path>', methods=['OPTIONS'])
+def handle_options(path):
+    return "", 200
+
+# Root OPTIONS handler
+@app.route('/', methods=['OPTIONS'])
+def handle_root_options():
+    return "", 200
+
 
 @app.after_request
 def after_request(response):
