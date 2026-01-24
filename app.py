@@ -1,68 +1,40 @@
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from config import Config
 from extensions import db
 from user_routes import user_bp
 from auth_routes import auth_bp
 from admin_routes import admin_bp
-
 import os
 
-import re
-
-app=Flask(__name__)
-
-# Ensure instance folder exists for SQLite (Explicitly match Config path)
-basedir = os.path.abspath(os.path.dirname(__file__))
-instance_dir = os.path.join(basedir, 'instance')
-if not os.path.exists(instance_dir):
-    os.makedirs(instance_dir)
-
+app = Flask(__name__)
 app.config.from_object(Config)
 
-# Robust Manual CORS Handling
-# Allow any Vercel subdomain or Localhost
-ALLOWED_ORIGINS_REGEX = re.compile(r"^(https://.*\.vercel\.app|http://localhost:\d+)$")
+# ✅ Proper CORS (THIS IS ENOUGH)
+CORS(
+    app,
+    origins=["https://*.vercel.app", "http://localhost:3000"],
+    supports_credentials=True
+)
 
-# CORS(app) # Remove Flask-CORS library init to avoid conflicts
-
-# Handle Preflight OPTIONS requests universally
-@app.route('/<path:path>', methods=['OPTIONS'])
-def handle_options(path):
-    return "", 200
-
-# Root OPTIONS handler
-@app.route('/', methods=['OPTIONS'])
-def handle_root_options():
-    return "", 200
-
-
-@app.after_request
-def after_request(response):
-    origin = request.headers.get('Origin')
-    if origin and ALLOWED_ORIGINS_REGEX.match(origin):
-        response.headers.add('Access-Control-Allow-Origin', origin)
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-        response.headers.add('Access-Control-Allow-Credentials', 'true')
-    return response
-jwt = JWTManager()
+jwt = JWTManager(app)
 db.init_app(app)
-jwt.init_app(app)
 
-app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(user_bp, url_prefix="/user")
 app.register_blueprint(admin_bp, url_prefix="/admin")
 
 @app.route("/")
 def home():
-    return ("Flask app running")
-    
-# Create DB tables
+    return "Flask app running"
+
 with app.app_context():
     db.create_all()
 
+# ✅ REQUIRED FOR RENDER
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 10000))
+    )
