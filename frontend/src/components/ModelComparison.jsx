@@ -18,16 +18,21 @@ export default function ModelComparison() {
     useEffect(() => {
         const fetchMetrics = async () => {
             try {
-                // ✅ Correct way on Vercel (Vite / modern React)
-                const API_URL = import.meta.env.VITE_API_URL;
+                // ✅ CRA environment variable
+                const API_URL = process.env.REACT_APP_API_URL;
 
                 if (!API_URL) {
-                    throw new Error("API URL not defined");
+                    throw new Error("REACT_APP_API_URL is not defined");
                 }
 
                 const res = await axios.get(
                     `${API_URL}/user/metrics`,
-                    { withCredentials: true }
+                    {
+                        withCredentials: true,
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }
                 );
 
                 setMetrics(res.data);
@@ -60,6 +65,7 @@ export default function ModelComparison() {
         );
     }
 
+    // Prepare chart data
     const data = Object.values(metrics).map(m => ({
         name: m.Model,
         Accuracy: m.Accuracy,
