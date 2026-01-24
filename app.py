@@ -1,5 +1,14 @@
 from flask import Flask
 from flask_cors import CORS
+
+app = Flask(__name__)
+# ✅ Proper CORS (THIS IS ENOUGH)
+CORS(
+    app,
+    origins=["https://*.vercel.app", "http://localhost:3000"],
+    supports_credentials=True
+)
+
 from flask_jwt_extended import JWTManager
 from config import Config
 from extensions import db
@@ -8,7 +17,6 @@ from auth_routes import auth_bp
 from admin_routes import admin_bp
 import os
 
-app = Flask(__name__)
 app.config.from_object(Config)
 
 # Ensure instance folder exists for SQLite (CRITICAL FOR RENDER)
@@ -20,12 +28,7 @@ try:
 except Exception as e:
     print(f"Error creating instance path: {e}")
 
-# ✅ Proper CORS (THIS IS ENOUGH)
-CORS(
-    app,
-    origins=["https://*.vercel.app", "http://localhost:3000"],
-    supports_credentials=True
-)
+
 
 jwt = JWTManager(app)
 db.init_app(app)
