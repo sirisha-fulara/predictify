@@ -5,9 +5,12 @@ app = Flask(__name__)
 # ✅ Proper CORS (THIS IS ENOUGH)
 CORS(
     app,
-    origins=["https://*.vercel.app", "http://localhost:3000"],
-    supports_credentials=True
+    supports_credentials=True,
+    origins=[
+        "https://predictify-49qt-3g822ezv6-sirishas-projects-916433e2.vercel.app"
+    ]
 )
+
 
 from flask_jwt_extended import JWTManager
 from config import Config
