@@ -11,6 +11,15 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 
+# Ensure instance folder exists for SQLite (CRITICAL FOR RENDER)
+try:
+    instance_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance')
+    if not os.path.exists(instance_path):
+        os.makedirs(instance_path)
+        print(f"Created instance path: {instance_path}")
+except Exception as e:
+    print(f"Error creating instance path: {e}")
+
 # ✅ Proper CORS (THIS IS ENOUGH)
 CORS(
     app,
